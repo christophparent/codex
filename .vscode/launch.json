@@ -7,7 +7,10 @@
       "name": "Cargo launch",
       "cargo": {
         "cwd": "${workspaceFolder}/codex-rs",
-        "args": ["build", "--bin=codex-tui"]
+        "args": [
+          "build",
+          "--bin=codex-tui"
+        ]
       },
       "args": []
     },
@@ -16,7 +19,36 @@
       "request": "attach",
       "name": "Attach to running codex CLI",
       "pid": "${command:pickProcess}",
-      "sourceLanguages": ["rust"]
+      "sourceLanguages": [
+        "rust"
+      ]
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Codex: Run CLI",
+      "cargo": {
+        "cwd": "${workspaceFolder}/codex-rs",
+        "args": [
+          "run",
+          "--bin",
+          "codex",
+          "--",
+          "${input:prompt}"
+        ]
+      },
+      "args": [],
+      "sourceLanguages": [
+        "rust"
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "id": "prompt",
+      "type": "promptString",
+      "description": "Codex CLI prompt",
+      "default": "explain this codebase to me"
     }
   ]
 }
